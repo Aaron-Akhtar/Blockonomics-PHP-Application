@@ -9,6 +9,7 @@ To install this application on an Ubuntu machine please follow these instruction
 2. Install Apache: "apt-get install apache2 -y;"
 3. Install PHP & The MySQL Extention: "apt-get install php php-mysql -y;"
 4. Move web assets to "/var/www/html" and access application via IP Address.
+5. Edit config.php and set your blockonomics api key (https://blockonomics.co) into the '$apikey' variable and set your database information in the according positions in the '$conn' variable.
 ```
 
 To setup the database please read the below documents on how to install phpmyadmin and a MySQL server:
