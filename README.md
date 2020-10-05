@@ -15,5 +15,6 @@ To setup the database please read the below documents on how to install phpmyadm
 
 (Ubuntu) MySQL Installation: https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-18-04
 (Ubuntu) phpmyadmin Installation: https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-18-04 
+(Ubuntu) Import Database (database.sql): https://www.inmotionhosting.com/support/website/databases/import-database-using-phpmyadmin/
 
 https://www.blockonomics.co/views/api.html
