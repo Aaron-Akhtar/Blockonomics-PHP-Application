@@ -13,5 +13,5 @@
     );
 
     // Connection info
-    $conn = mysqli_connect("127.0.0.1", "user", "pass", "db_name"); // enter your info
+    $conn = mysqli_connect("localhost", "root", "", "bitcoin"); // enter your info
 ?>

@@ -46,8 +46,9 @@ function createInvoice($product, $price){
     $code = generateRandomString(25);
     $address = generateAddress();
     $status = 0;
-    $sql = "INSERT INTO `invoices` (`code`, `address`, `price`, `status`, `product`)
-    VALUES ('$code', '$address', '$price', '$status', '$product')";
+    $ip = getIp();
+    $sql = "INSERT INTO `invoices` (`code`, `address`, `price`, `status`, `product`,`ip`)
+    VALUES ('$code', '$address', '$price', '$status', '$product', '$ip')";
     mysqli_query($conn, $sql);
     return $code;
 }
@@ -154,4 +155,50 @@ function BTCtoUSD($amount){
     return $amount * $price;
 }
 
+function USDtoBTC($amount){
+    $price = getBTCPrice("USD");
+    return $amount/$price;
+}
+
+function getInvoice($addr){
+    global $conn;
+    $sql = "SELECT * FROM `invoices` WHERE `address`='$addr'";
+    $result = mysqli_query($conn, $sql);
+    $invoice = "Error, try again";
+    while($row = mysqli_fetch_assoc($result)){
+        $invoice = $row['code'];
+    }
+    return $invoice;
+}
+
+function getIp(){
+    if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+        //ip from share internet
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    }elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+        //ip pass from proxy
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }else{
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
+}
+
+function createOrder($invoice, $ip){
+    global $conn;
+    
+    $sql = "INSERT INTO `orders` (`invoice`, `ip`) VALUES ('$invoice', '$ip')";
+    mysqli_query($conn, $sql);
+}
+
+function getInvoiceIp($addr){
+    global $conn;
+    $sql = "SELECT * FROM `invoices` WHERE `address`='$addr'";
+    $result = mysqli_query($conn, $sql);
+    $ip = "Error, try again";
+    while($row = mysqli_fetch_assoc($result)){
+        $ip = $row['ip'];
+    }
+    return $ip;
+}
 ?>

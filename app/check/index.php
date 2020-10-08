@@ -3,7 +3,7 @@
 Callback location, set this in blockonmics merchant page
 
 For testing payments locally, use this:
-localhost/bitcoin/check.php?secret=asecretcode&addr=[ADDRESS]&status=[STATUS CODE]&txid=[TXID]&value=[Amount paid in satoshi]
+localhost/bitcoin/check?secret=asecretcode&addr=[ADDRESS]&status=[STATUS CODE]&txid=[TXID]&value=[Amount paid in satoshi]
 */
 include_once "../config.php";
 include_once "../functions.php";
@@ -26,7 +26,7 @@ if($secret != $secretlocal){
     exit();
 }
 
-$value = $value / 100000000; // Conversion from satoshi to btc
+
 $sql = "INSERT INTO `payments` (`txid`, `value`, `addr`, `status`)
 VALUES ('$txid', '$value', '$addr', '$status')";
 mysqli_query($conn, $sql);
@@ -34,6 +34,9 @@ echo $sql;
 // Get invoice price
 $code = getCode($addr);
 $price = getInvoicePrice($code);
+// Convert price to satoshi for check
+$price = USDtoBTC($price);
+$price = $price *100000000;
 
 // Expired
 if($status < 0){
@@ -46,6 +49,8 @@ if($value >= $price){
     if($status == 2){
         // Correct amount paid and fully confirmed
         // Do whatever you want here once payment is correct
+        $invoice = getInvoice($addr);
+        createOrder($invoice, getInvoiceIp($addr));
     }
 }else {
     // Buyer hasnt paid enough

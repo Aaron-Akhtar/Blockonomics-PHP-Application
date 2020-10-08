@@ -1,6 +1,16 @@
 <?php
+/*
+Payment page
+
+This code is designed to be easily understandable at the expense of speed, 
+for large productions this can be done with one sql request, instead of several
+
+*/
 include_once "config.php";
 include_once "functions.php";
+// Check code
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +28,7 @@ include_once "functions.php";
     <!-- Navigation bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="row">
-            <a class="navbar-brand" href="#">Bitcoin Example</a>
+            <a class="navbar-brand" href="index.php">Bitcoin Example</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -29,40 +39,64 @@ include_once "functions.php";
                     <a class="nav-link" href="index.php">Store <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="orders.php">Purchases <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="orders.php">Purchases</a>
                 </li>
+                
                 </ul>
                 
             </div>
         </div>
     </nav>
 
-    <!-- Products -->
+    <!-- Invoice -->
+    
     <main>
         <div class="row">
-            <div class="product-hold">
-                <?php
-                // Get and display all products
-                $sql = "SELECT * FROM `products` ORDER BY `id` DESC";
-                $result = mysqli_query($conn, $sql);
-                while($row = mysqli_fetch_assoc($result)){
-                    ?>
-                    <div class="product">
-                        <div class="card" style="width: 95%;margin:0 auto;">
-                            <div class="card-body">
-                                <h5 class="card-title"><?php echo $row['name']; ?></h5>
-                                <h6 class="card-subtitle mb-2 text-muted">$<?php echo $row['price']; ?> <span style="font-size:12px">(BTC <?php echo round(USDtoBTC($row['price']), 8); ?>)</span> </h6>
-                                <p class="card-text"><?php echo $row['description'] ?></p>
-                                <a href="buy.php?id=<?php echo $row['id']; ?>" class="card-link">Buy now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <?php
-                }
+            <h1 style="width:100%;">Previous purchases</h1>
+            <?php
+            $ip = getIp();
+            $sql = "SELECT * FROM `orders` WHERE `ip`='$ip' ORDER BY `id` DESC";
+            $result = mysqli_query($conn, $sql);
+            // Check number of orders
+            if(mysqli_num_rows($result)==0){
+                // No previous orders
                 ?>
-            </div>
+                <p>No previous orders. This is figured out using your IP address</p>
+                <?php
+            }else {
+                ?>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Invoice</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        while($row = mysqli_fetch_assoc($result)){
+                            ?>
+                            <tr>
+                                <th scope="row"><?php echo getProduct(getInvoiceProduct($row['invoice'])); ?></th>
+                                <td><a href="invoice.php?code=<?php echo $row['invoice']; ?>"><?php echo $row['invoice']; ?></a></td>
+                                
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                        
+                    </tbody>
+                </table>
+
+                <?php
+            }
+            ?>
+            
         </div>
     </main>
+    
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
