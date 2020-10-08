@@ -3,7 +3,7 @@
 Callback location, set this in blockonmics merchant page
 
 For testing payments locally, use this:
-localhost/bitcoin/check?secret=asecretcode&addr=[ADDRESS]&status=[STATUS CODE]&txid=[TXID]&value=[Amount paid in satoshi]
+localhost/bitcoin/check.php?secret=asecretcode&addr=[ADDRESS]&status=[STATUS CODE]&txid=[TXID]&value=[Amount paid in satoshi]
 */
 include_once "../config.php";
 include_once "../functions.php";
