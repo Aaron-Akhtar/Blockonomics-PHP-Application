@@ -51,7 +51,7 @@ include_once "functions.php";
                         <div class="card" style="width: 95%;margin:0 auto;">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $row['name']; ?></h5>
-                                <h6 class="card-subtitle mb-2 text-muted">$<?php echo $row['price']; ?> <span style="font-size:12px">(BTC <?php echo round(USDtoBTC($row['price']), 8); ?>)</span> </h6>
+                                <h6 class="card-subtitle mb-2 text-muted">$<?php echo $row['price']; ?></h6>
                                 <p class="card-text"><?php echo $row['description'] ?></p>
                                 <a href="buy.php?id=<?php echo $row['id']; ?>" class="card-link">Buy now</a>
                             </div>
