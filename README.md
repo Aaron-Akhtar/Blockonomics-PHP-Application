@@ -10,24 +10,5 @@ Please follow these instructions for your merchant setup (Setting the callback U
 4. Press `Save Changes` and you are set.
 ```
 
-To install this application on an Ubuntu machine please follow these instructions:
-
-```
-1. Update Packages: "apt update -y;"
-2. Install Apache: "apt-get install apache2 -y;"
-3. Install PHP & The MySQL Extention: "apt-get install php php-mysql -y;"
-4. Move web assets to "/var/www/html" and access application via IP Address.
-5. Edit config.php and set your blockonomics api key (https://blockonomics.co) into the '$apikey' variable and set your database information in the according positions in the '$conn' variable.
-```
-
-To setup the database please read the below documents on how to install phpmyadmin and a MySQL server:
-
-(Ubuntu) MySQL Installation: https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-18-04
-
-(Ubuntu) phpmyadmin Installation: https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-18-04 
-
-(Ubuntu) Import Database (database.sql): https://www.inmotionhosting.com/support/website/databases/import-database-using-phpmyadmin/
-
-
-
+Make sure to import the `database.sql` file into your database.
 https://www.blockonomics.co/views/api.html
