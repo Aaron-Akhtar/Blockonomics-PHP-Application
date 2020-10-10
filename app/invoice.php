@@ -113,14 +113,17 @@ if($status == 0){
         };
         xmlhttp.open("GET", "getprice.php?code=" + code, true);
         xmlhttp.send();
+        // Create socket variables
         var addr =  document.getElementById("address").innerHTML;
         var timestamp = Math.floor(Date.now() / 1000)-1800;
         var wsuri2 = "wss://www.blockonomics.co/payment/"+ addr+"?timestamp="+timestamp;
+        // Create socket and monitor
         var socket = new WebSocket(wsuri2, "protocolOne");
         socket.onmessage = function(event){
             console.log(event.data);
             response = JSON.parse(event.data);
             if(response.value >= price){
+                // Update visible status dependent on socket response
                 if(response.status == 1 || response.status == 0){
                     console.log("Invoice paid");
                     document.getElementById("status").innerHTML= "PENDING";
@@ -131,13 +134,9 @@ if($status == 0){
                     document.getElementById("status").innerHTML= "PAID";
                     document.getElementById("status").setAttribute("style", "color: green !important;");
                     document.getElementById("info").innerHTML = "Your payment is done and you can leave the website.";
-
                 }
-                
             }
         }
-        
-        
     </script>
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

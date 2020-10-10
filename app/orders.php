@@ -8,8 +8,6 @@ for large productions this can be done with one sql request, instead of several
 */
 include_once "config.php";
 include_once "functions.php";
-// Check code
-
 
 ?>
 <!DOCTYPE html>
@@ -32,7 +30,6 @@ include_once "functions.php";
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -65,13 +62,11 @@ include_once "functions.php";
                 <?php
             }else {
                 ?>
-
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th scope="col">Product</th>
                             <th scope="col">Invoice</th>
-                            
                         </tr>
                     </thead>
                     <tbody>
@@ -86,14 +81,11 @@ include_once "functions.php";
                             <?php
                         }
                         ?>
-                        
                     </tbody>
                 </table>
-
                 <?php
             }
             ?>
-            
         </div>
     </main>
     

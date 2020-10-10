@@ -1,6 +1,6 @@
 <?php
     // Blockonmics API stuff
-    $apikey = "2VUC8jmjSqGLMqOjt56fwXfPc9rExK0yioruxNjH0NQ";
+    $apikey = "";
     $url = "https://www.blockonomics.co/api/";
     
     $options = array( 
