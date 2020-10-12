@@ -120,22 +120,10 @@ if($status == 0){
         // Create socket and monitor
         var socket = new WebSocket(wsuri2, "protocolOne");
         socket.onmessage = function(event){
-            console.log(event.data);
-            response = JSON.parse(event.data);
-            // if(response.value >= price){
-                // Update visible status dependent on socket response
-                if(response.status == 1 || response.status == 0){
-                    console.log("Invoice paid");
-                    document.getElementById("status").innerHTML= "PENDING";
-                    document.getElementById("status").setAttribute("style", "color: orange !important;");
-                    document.getElementById("info").innerHTML = "Your payment is pending, feel free to leave the website while you wait.";
-                }else if(response.status == 2){
-                    console.log("Invoice paid");
-                    document.getElementById("status").innerHTML= "PAID";
-                    document.getElementById("status").setAttribute("style", "color: green !important;");
-                    document.getElementById("info").innerHTML = "Your payment is done and you can leave the website.";
-                }
-            // }
+             setTimeout(function(){
+               location.reload();
+             }, 1000);
+             }
         }
     </script>
     <!-- Bootstrap JS -->
