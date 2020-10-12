@@ -43,7 +43,9 @@ if($status < 0){
     exit();
 }
 
-if($value >= $price){
+
+
+if($price >= $price){
     // Update invoice status
     updateInvoiceStatus($code, $status);
     if($status == 2){

@@ -24,10 +24,13 @@ $price = getInvoicePrice($code);
 
 // Status translation
 
+$statusval = $status;
+$info = "";
 if($status == 0){
     $status = "<span style='color: red' id='status'>UNPAID</span>";
 }else if($status == 1){
     $status = "<span style='color: orangered' id='status'>PENDING</span>";
+    $info = "<p>Payment is pending, feel free to leave the site.</p>";
 }else if($status == 2){
     $status = "<span style='color: green' id='status'>PAID</span>";
 }else if($status == -1){
@@ -35,6 +38,7 @@ if($status == 0){
 }else {
     $status = "<span style='color: red' id='status'>Error, expired</span>";
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -94,6 +98,7 @@ if($status == 0){
             
             
             <p style="display:block;width:100%;">Status: <?php echo $status; ?></p>
+            <?php echo $info; ?>
             <div id="info"></div>
             <h2 style="width:100%;margin-top: 20px;">What youre paying for:</h2>
             <h4 style="width:100%;margin-top: 20px;"><?php echo getProduct($product); ?></h4>
@@ -101,30 +106,23 @@ if($status == 0){
         </div>
     </main>
     <script>
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const code = urlParams.get("code");
-        // get price
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                price = this.responseText;
-            }
-        };
-        xmlhttp.open("GET", "getprice.php?code=" + code, true);
-        xmlhttp.send();
+        var status = <?php echo $statusval; ?>
+        
         // Create socket variables
         var addr =  document.getElementById("address").innerHTML;
-        var timestamp = Math.floor(Date.now() / 1000)-1800;
+        var timestamp = Math.floor(Date.now() / 1000)-5;
         var wsuri2 = "wss://www.blockonomics.co/payment/"+ addr+"?timestamp="+timestamp;
         // Create socket and monitor
-        var socket = new WebSocket(wsuri2, "protocolOne");
-        socket.onmessage = function(event){
-             setTimeout(function(){
-               location.reload();
-             }, 1000);
-             }
+        var socket = new WebSocket(wsuri2, "protocolOne")
+        if(status != 2){
+            socket.onmessage = function(event){
+                console.log(event.data);
+                response = JSON.parse(event.data);
+                
+                setTimeout(function(){ window.location=window.location }, 1000);
+            }
         }
+        
     </script>
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
