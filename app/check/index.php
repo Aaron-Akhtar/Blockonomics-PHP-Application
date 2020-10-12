@@ -45,8 +45,7 @@ if($status < 0){
 }
 
 
-
-if($value >= $price){
+if($value >= round($price)){
     // Update invoice status
     updateInvoiceStatus($code, $status);
     if($status == 2){

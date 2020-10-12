@@ -103,7 +103,7 @@ if($status == 0){
             <p style="display:block;width:100%;">Status: <?php echo $status; ?></p>
             <?php echo $info; ?>
             <div id="info"></div>
-            <h2 style="width:100%;margin-top: 20px;">What youre paying for:</h2>
+            <h2 style="width:100%;margin-top: 20px;">What you're paying for:</h2>
             <h4 style="width:100%;margin-top: 20px;"><?php echo getProduct($product); ?></h4>
             <p><?php echo getDescription($product); ?></p>
         </div>
@@ -112,7 +112,7 @@ if($status == 0){
         var status = <?php echo $statusval; ?>
         
         // Create socket variables
-        if(status < 2){
+        if(status < 2 && status != -2){
         var addr =  document.getElementById("address").innerHTML;
         var timestamp = Math.floor(Date.now() / 1000)-5;
         var wsuri2 = "wss://www.blockonomics.co/payment/"+ addr+"?timestamp="+timestamp;
