@@ -109,17 +109,18 @@ if($status == 0){
         var status = <?php echo $statusval; ?>
         
         // Create socket variables
+        if(status < 2){
         var addr =  document.getElementById("address").innerHTML;
         var timestamp = Math.floor(Date.now() / 1000)-5;
         var wsuri2 = "wss://www.blockonomics.co/payment/"+ addr+"?timestamp="+timestamp;
         // Create socket and monitor
         var socket = new WebSocket(wsuri2, "protocolOne")
-        if(status != 2){
             socket.onmessage = function(event){
                 console.log(event.data);
                 response = JSON.parse(event.data);
-                
-                setTimeout(function(){ window.location=window.location }, 1000);
+                //Refresh page if payment moved up one status
+                if (response.status > status)
+                  setTimeout(function(){ window.location=window.location }, 1000);
             }
         }
         
