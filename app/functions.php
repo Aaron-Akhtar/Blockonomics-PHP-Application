@@ -45,7 +45,7 @@ function createInvoice($product, $price){
     global $conn;
     $code = generateRandomString(25);
     $address = generateAddress();
-    $status = 0;
+    $status = -1;
     $ip = getIp();
     $sql = "INSERT INTO `invoices` (`code`, `address`, `price`, `status`, `product`,`ip`)
     VALUES ('$code', '$address', '$price', '$status', '$product', '$ip')";

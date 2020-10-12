@@ -11,6 +11,7 @@ include_once "../functions.php";
 $secretlocal = "asecretcode"; // Code in the callback, make sure this matches to what youve set
 
 // Get all these values
+$status = 0;
 $txid = $_GET['txid'];
 $value = $_GET['value'];
 $status = $_GET['status'];
@@ -18,7 +19,7 @@ $addr = $_GET['addr'];
 $secret = $_GET['secret'];
 
 // Check all are set
-if(empty($txid) || empty($value) || empty($status) || empty($addr) || empty($secret)){
+if(empty($txid) || empty($value) || empty($addr) || empty($secret)){
     exit();
 }
 
@@ -45,7 +46,7 @@ if($status < 0){
 
 
 
-if($price >= $price){
+if($value >= $price){
     // Update invoice status
     updateInvoiceStatus($code, $status);
     if($status == 2){
@@ -56,6 +57,6 @@ if($price >= $price){
     }
 }else {
     // Buyer hasnt paid enough
-    updateInvoiceStatus($code, -1);
+    updateInvoiceStatus($code, -2);
 }
 ?>

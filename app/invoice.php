@@ -27,14 +27,17 @@ $price = getInvoicePrice($code);
 $statusval = $status;
 $info = "";
 if($status == 0){
-    $status = "<span style='color: red' id='status'>UNPAID</span>";
+    $status = "<span style='color: orangered' id='status'>PENDING</span>";
+    $info = "<p>You payment has been received. Invoice will be marked paid on two blockchain confirmations.</p>";
 }else if($status == 1){
     $status = "<span style='color: orangered' id='status'>PENDING</span>";
     $info = "<p>You payment has been received. Invoice will be marked paid on two blockchain confirmations.</p>";
 }else if($status == 2){
     $status = "<span style='color: green' id='status'>PAID</span>";
 }else if($status == -1){
-    $status = "<span style='color: red' id='status'>AMOUNT TOO SMALL, PAY REMAINING</span>";
+    $status = "<span style='color: red' id='status'>UNPAID</span>";
+}else if($status == -2){
+    $status = "<span style='color: red' id='status'>Too little paid, please pay the rest.</span>";
 }else {
     $status = "<span style='color: red' id='status'>Error, expired</span>";
 }
