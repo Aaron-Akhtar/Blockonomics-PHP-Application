@@ -122,7 +122,7 @@ if($status == 0){
         socket.onmessage = function(event){
             console.log(event.data);
             response = JSON.parse(event.data);
-            if(response.value >= price){
+            // if(response.value >= price){
                 // Update visible status dependent on socket response
                 if(response.status == 1 || response.status == 0){
                     console.log("Invoice paid");
@@ -135,7 +135,7 @@ if($status == 0){
                     document.getElementById("status").setAttribute("style", "color: green !important;");
                     document.getElementById("info").innerHTML = "Your payment is done and you can leave the website.";
                 }
-            }
+            // }
         }
     </script>
     <!-- Bootstrap JS -->
