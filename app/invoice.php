@@ -30,7 +30,7 @@ if($status == 0){
     $status = "<span style='color: red' id='status'>UNPAID</span>";
 }else if($status == 1){
     $status = "<span style='color: orangered' id='status'>PENDING</span>";
-    $info = "<p>Payment is pending, feel free to leave the site.</p>";
+    $info = "<p>You payment has been received. Invoice will be marked paid on two blockchain confirmations.</p>";
 }else if($status == 2){
     $status = "<span style='color: green' id='status'>PAID</span>";
 }else if($status == -1){
