@@ -12,3 +12,5 @@ Please follow these instructions for your merchant setup (Setting the callback U
 
 Make sure to import the `database.sql` file into your database.
 https://www.blockonomics.co/views/api.html
+
+Video Showcase: https://www.youtube.com/watch?v=dibw1sGz3to&ab_channel=Blockonomics
